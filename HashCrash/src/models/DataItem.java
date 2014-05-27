@@ -12,14 +12,14 @@ package models;
  */
 public class DataItem {
     
-    private int key;
+    private String key;
     
-    public DataItem(int newKey)
+    public DataItem(String newKey)
     {
         key = newKey;
     }
     
-    public int getKey()
+    public String getKey()
     {
         return key;
     }

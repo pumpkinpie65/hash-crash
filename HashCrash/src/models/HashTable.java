@@ -12,15 +12,15 @@ package models;
  */
 public class HashTable {
     
-    private DataItem[] hashArray;
-    private int arraySize;
-    private DataItem nonItem;   //for deleted items
+    private final DataItem[] hashArray;
+    private final int arraySize;
+    private final DataItem nonItem;   //for deleted items
     
     public HashTable(int size)  //contstructor
     {
         arraySize = size;
         hashArray = new DataItem[arraySize];
-        nonItem = new DataItem(-1);     //deleted item key is -1
+        nonItem = new DataItem(null);     //deleted item key is -1
     }
     
     public void displayTable()
@@ -46,6 +46,24 @@ public class HashTable {
     }
     
     /**
+     * taken from page 565 in the book
+     * @param key
+     * @return 
+     */
+    public int hashFunc3(String key)
+    {
+        int hashVal = 0;
+        
+        for (int j = 0; j < key.length(); j++)
+        {
+            int letter = key.charAt(j) - 96;    //get char code
+            hashVal = (hashVal * 27 + letter) % arraySize;
+        }
+        
+        return hashVal;
+    }
+    
+    /**
      * NOTE: assumes table is not full
      * @param item 
      */
@@ -53,10 +71,10 @@ public class HashTable {
     {
         //assumes table not full
         
-        int key = item.getKey();
-        int hashVal = hashFunc(key);
+        String key = item.getKey();
+        int hashVal = hashFunc3(key);
         
-        while(hashArray[hashVal] != null && hashArray[hashVal].getKey() != -1)
+        while(hashArray[hashVal] != null && hashArray[hashVal].getKey() != null)
         {
             ++hashVal;      //go to next cell
             hashVal %= arraySize;   //wraparound if necessary
@@ -65,13 +83,13 @@ public class HashTable {
         hashArray[hashVal] = item;    //insert item
     }
     
-    public DataItem delete(int key) 
+    public DataItem delete(String key) 
     {
-        int hashVal = hashFunc(key);
+        int hashVal = hashFunc3(key);
         
         while(hashArray[hashVal] != null)
         {
-            if (hashArray[hashVal].getKey() == key)
+            if (hashArray[hashVal].getKey().equals(key))
             {
                 DataItem temp = hashArray[hashVal]; //save item
                 hashArray[hashVal] = nonItem;       //deleteItem
@@ -85,13 +103,13 @@ public class HashTable {
         return null;            //can't find item
     }
     
-    public DataItem find(int key) 
+    public DataItem find(String key) 
     {
-        int hashVal = hashFunc(key);
+        int hashVal = hashFunc3(key);
         
         while(hashArray[hashVal] != null)
         {
-            if(hashArray[hashVal].getKey() == key)
+            if(hashArray[hashVal].getKey().equals(key))
             {
                 return hashArray[hashVal];
             }
