@@ -90,6 +90,7 @@ public class HashCrash extends JFrame implements ActionListener {
                   fieldInt = Integer.parseInt(thetext);
               } catch (Exception ex) {
                   ex.printStackTrace();
+                  thetext = "There was an error";
               }
               
               centerPanel.setText(thetext);

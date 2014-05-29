@@ -6,6 +6,8 @@
 
 package models;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author David
@@ -15,7 +17,7 @@ public class HashTable {
     private final DataItem[] hashArray;
     private final int arraySize;
     private final DataItem nonItem;   //for deleted items
-    private int crashes = 0;
+    private ArrayList<Crash> crashes;
     
     public HashTable(int size)  //contstructor
     {
@@ -75,14 +77,19 @@ public class HashTable {
         String key = item.getKey();
         int hashVal = hashFunc3(key);
         
+        int shouldBeHashVal = hashVal;
+        
         while(hashArray[hashVal] != null && hashArray[hashVal].getKey() != null)
-        {
-            crashes++;
+        {            
             ++hashVal;      //go to next cell
             hashVal %= arraySize;   //wraparound if necessary
         }
         
+        int foundAtHashVal = hashVal;
+        
         hashArray[hashVal] = item;    //insert item
+        
+        crashes.add(new Crash(item.getKey(), shouldBeHashVal, foundAtHashVal));
     }
     
     public DataItem delete(String key) 
@@ -125,9 +132,9 @@ public class HashTable {
     
     /**
      * 
-     * @return number of crashes when creating the hast table
+     * @return ArrayList of crashes when creating the table
      */
-    public int getCrashes()
+    public ArrayList<Crash> getCrashes()
     {
         return crashes;
     }

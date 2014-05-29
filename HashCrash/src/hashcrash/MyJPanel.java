@@ -7,7 +7,9 @@
 package hashcrash;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import models.Crash;
 
 /**
  *
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 public class MyJPanel extends JPanel {
 
     private String theText;
+    private ArrayList<Crash> crashes;
     
     public MyJPanel(String newText) {
         theText = newText;
@@ -24,6 +27,11 @@ public class MyJPanel extends JPanel {
     public void setText(String newText)
     {
         theText = newText;
+    }
+    
+    public void setCrashes(ArrayList<Crash> theCrashes)
+    {
+        crashes = theCrashes;
     }
     
  ////////////    PAINT   ////////////////////////////////
