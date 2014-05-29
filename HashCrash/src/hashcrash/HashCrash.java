@@ -91,7 +91,10 @@ public class HashCrash extends JFrame implements ActionListener {
               } catch (Exception ex) {
                   ex.printStackTrace();
                   thetext = "There was an error";
+                  fieldInt = 0;
               }
+              
+              centerPanel.setCrashes(createHashTable(fieldInt).getCrashes());
               
               centerPanel.setText(thetext);
               repaint();

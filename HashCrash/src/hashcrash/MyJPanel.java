@@ -37,9 +37,22 @@ public class MyJPanel extends JPanel {
  ////////////    PAINT   ////////////////////////////////
   public void paintComponent (Graphics g) {
 
-         g.setFont(Fonts.plainfont);
-         g.drawString("I am paint, field contains " + theText,20,30);
+    int xPos = 20;
+    int yPos = 30;
+      
+    g.setFont(Fonts.plainfont);
+    g.drawString("I am paint, field contains " + theText, xPos, yPos);
 
+    if (crashes != null)
+    {
+        for (int i = 0; i < crashes.size(); i++)
+        {
+            String stringToPrint = "Hash Crash: " + crashes.get(i).getName() + "        " +
+                    "should be at   " + crashes.get(i).getShouldBePosition() + "    " +
+                    "found at   " + crashes.get(i).getFoundAtPosition();
+            g.drawString(stringToPrint, xPos += 20, yPos += 30);
+        }
+    }
   }
 } // End Of MyJPanel
 
