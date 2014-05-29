@@ -21,6 +21,11 @@ public class MyJPanel extends JPanel {
         theText = newText;
     }
     
+    public void setText(String newText)
+    {
+        theText = newText;
+    }
+    
  ////////////    PAINT   ////////////////////////////////
   public void paintComponent (Graphics g) {
 

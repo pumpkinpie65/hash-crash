@@ -17,6 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import models.DataItem;
+
+import models.HashTable;
+import models.ToonArray;
 
 /**
  *
@@ -55,7 +59,7 @@ public class HashCrash extends JFrame implements ActionListener {
            northPanel.add(new Label("Enter a hashtable size: "));
            hashsizefield = new JTextField(thetext,20);
            northPanel.add(hashsizefield);
-           hashbutton = new JButton("CreateHash");
+           hashbutton = new JButton("Create Hash");
            northPanel.add(hashbutton);
            hashbutton.addActionListener(this);
            exitbutton = new JButton("Exit");
@@ -72,15 +76,38 @@ public class HashCrash extends JFrame implements ActionListener {
     }
 
     ////////////BUTTON CLICKS ///////////////////////////
-
+    @Override
     public void actionPerformed(ActionEvent e) {
-             if (e.getSource()==exitbutton) {
-                   dispose(); System.exit(0);
-             }
+        if (e.getSource()==exitbutton) {
+              dispose(); System.exit(0);
+        }
 
-             if (e.getSource()==hashbutton) {
-                   thetext = hashsizefield.getText();
-                   repaint();
-             }
+        if (e.getSource()==hashbutton) {
+              thetext = hashsizefield.getText();
+              
+              int fieldInt;
+              try {
+                  fieldInt = Integer.parseInt(thetext);
+              } catch (Exception ex) {
+                  ex.printStackTrace();
+              }
+              
+              centerPanel.setText(thetext);
+              repaint();
+        }
     } // end actionPerformed
+    
+    private HashTable createHashTable(int tableSize)
+    {
+        HashTable hashTable = new HashTable(tableSize);
+        
+        String[] toonNames = ToonArray.getNames();
+        for (int i = 0; i < toonNames.length; i++)
+        {
+            DataItem newItem = new DataItem(toonNames[i]);
+            hashTable.insert(newItem);
+        }
+        
+        return hashTable;
+    }
 }

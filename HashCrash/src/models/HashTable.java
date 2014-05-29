@@ -15,6 +15,7 @@ public class HashTable {
     private final DataItem[] hashArray;
     private final int arraySize;
     private final DataItem nonItem;   //for deleted items
+    private int crashes = 0;
     
     public HashTable(int size)  //contstructor
     {
@@ -76,6 +77,7 @@ public class HashTable {
         
         while(hashArray[hashVal] != null && hashArray[hashVal].getKey() != null)
         {
+            crashes++;
             ++hashVal;      //go to next cell
             hashVal %= arraySize;   //wraparound if necessary
         }
@@ -119,5 +121,14 @@ public class HashTable {
         }
         
         return null;        //can't find item
+    }
+    
+    /**
+     * 
+     * @return number of crashes when creating the hast table
+     */
+    public int getCrashes()
+    {
+        return crashes;
     }
 }
