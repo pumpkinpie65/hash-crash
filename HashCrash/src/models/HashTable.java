@@ -17,7 +17,7 @@ public class HashTable {
     private final DataItem[] hashArray;
     private final int arraySize;
     private final DataItem nonItem;   //for deleted items
-    private ArrayList<Crash> crashes;
+    private ArrayList<Crash> crashes = new ArrayList<Crash>();
     
     public HashTable(int size)  //contstructor
     {
@@ -76,6 +76,7 @@ public class HashTable {
         
         String key = item.getKey();
         int hashVal = hashFunc3(key);
+        boolean addCrash = false;
         
         int shouldBeHashVal = hashVal;
         
@@ -83,13 +84,17 @@ public class HashTable {
         {            
             ++hashVal;      //go to next cell
             hashVal %= arraySize;   //wraparound if necessary
+            addCrash = true;
         }
         
         int foundAtHashVal = hashVal;
         
         hashArray[hashVal] = item;    //insert item
         
-        crashes.add(new Crash(item.getKey(), shouldBeHashVal, foundAtHashVal));
+        if (addCrash)
+        {
+            crashes.add(new Crash(item.getKey(), shouldBeHashVal, foundAtHashVal));
+        }
     }
     
     public DataItem delete(String key) 

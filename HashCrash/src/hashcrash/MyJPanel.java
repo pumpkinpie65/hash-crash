@@ -18,7 +18,7 @@ import models.Crash;
 public class MyJPanel extends JPanel {
 
     private String theText;
-    private ArrayList<Crash> crashes;
+    private ArrayList<Crash> crashes = new ArrayList<Crash>();
     
     public MyJPanel(String newText) {
         theText = newText;
@@ -41,7 +41,8 @@ public class MyJPanel extends JPanel {
     int yPos = 30;
       
     g.setFont(Fonts.plainfont);
-    g.drawString("I am paint, field contains " + theText, xPos, yPos);
+    //g.drawString("I am paint, field contains " + theText, xPos, yPos);
+    g.drawString("Hash Crash count is " + crashes.size(), xPos, yPos);
 
     if (crashes != null)
     {
@@ -50,7 +51,7 @@ public class MyJPanel extends JPanel {
             String stringToPrint = "Hash Crash: " + crashes.get(i).getName() + "        " +
                     "should be at   " + crashes.get(i).getShouldBePosition() + "    " +
                     "found at   " + crashes.get(i).getFoundAtPosition();
-            g.drawString(stringToPrint, xPos += 20, yPos += 30);
+            g.drawString(stringToPrint, xPos, yPos += 30);
         }
     }
   }
