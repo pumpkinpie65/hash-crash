@@ -29,7 +29,7 @@ import models.ToonArray;
 public class HashCrash extends JFrame implements ActionListener {
 
     private static int win_xpos=0,win_ypos=0;// place window here
-    private static int win_xsize=700,win_ysize=500;//  window size
+    private static int win_xsize=700,win_ysize=700;//  window size
 
     // Private state variables.
 
@@ -37,7 +37,7 @@ public class HashCrash extends JFrame implements ActionListener {
     private JPanel northPanel;
     private MyJPanel centerPanel;
     private JTextField hashsizefield;
-    private String thetext = "101";
+    private String thetext = "";
 
 
     ////////////MAIN////////////////////////

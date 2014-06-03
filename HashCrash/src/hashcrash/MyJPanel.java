@@ -41,9 +41,8 @@ public class MyJPanel extends JPanel {
     int yPos = 30;
       
     g.setFont(Fonts.plainfont);
-    //g.drawString("I am paint, field contains " + theText, xPos, yPos);
     g.drawString("Hash Crash count is " + crashes.size(), xPos, yPos);
-
+    
     if (crashes != null)
     {
         for (int i = 0; i < crashes.size(); i++)
